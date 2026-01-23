@@ -1,4 +1,5 @@
 import { Button } from '@/components/atoms/Button';
+import GameGrid from '@/components/organisms/GameGrid';
 import { Container } from '@components/molecules/Container';
 import useAppNavigation from '@navigation/useAppNavigation';
 import { useRoute } from '@react-navigation/native';
@@ -7,10 +8,11 @@ import {
   memo,
   useCallback,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { GameRoute } from './definitions';
 import useStyles from './styles';
 
@@ -22,17 +24,7 @@ const Game: FunctionComponent = () => {
   const { goTo } = useAppNavigation();
 
   // Styles
-  const {
-    title,
-    subtitle,
-    card,
-    board,
-    row: rowStyle,
-    cell,
-    cellText,
-    actionButton,
-    actionButtonText,
-  } = useStyles();
+  const { title, subtitle, card } = useStyles();
 
   // Route Params
   const {
@@ -98,6 +90,7 @@ const Game: FunctionComponent = () => {
     [currentPlayer, winner],
   );
 
+  // Handle reset press
   const onResetPress = useCallback(() => {
     setGameGrid(
       Array(3)
@@ -107,6 +100,13 @@ const Game: FunctionComponent = () => {
     setCurrentPlayer('X');
     setWinner(null);
   }, []);
+
+  // Button Title
+  const buttonTitle = useMemo(() => {
+    return winner
+      ? `${t('winner')}: ${winner === 'X' ? playerX : playerO}`
+      : t('resetGame');
+  }, [winner, t, playerX, playerO]);
 
   return (
     <Container>
@@ -118,29 +118,8 @@ const Game: FunctionComponent = () => {
         {t('playerO')}: {playerO}
       </Text>
       <View style={card}>
-        <View style={board}>
-          {[0, 1, 2].map(row => (
-            <View key={row} style={rowStyle}>
-              {[0, 1, 2].map(col => (
-                <Pressable
-                  key={`${row}-${col}`}
-                  style={cell}
-                  onPress={() => onCellPress(row, col)}
-                >
-                  <Text style={cellText}>{gameGrid[row][col]}</Text>
-                </Pressable>
-              ))}
-            </View>
-          ))}
-        </View>
-        <Button
-          title={
-            winner
-              ? `${t('winner')}: ${winner === 'X' ? playerX : playerO}`
-              : t('resetGame')
-          }
-          onPress={onResetPress}
-        />
+        <GameGrid gameGrid={gameGrid} onCellPress={onCellPress} />
+        <Button title={buttonTitle} onPress={onResetPress} />
       </View>
     </Container>
   );
