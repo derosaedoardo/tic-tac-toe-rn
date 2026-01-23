@@ -1,5 +1,6 @@
 import { Button } from '@/components/atoms/Button';
 import GameGrid from '@/components/organisms/GameGrid';
+import { storage } from '@/store';
 import { Container } from '@components/molecules/Container';
 import useAppNavigation from '@navigation/useAppNavigation';
 import { useRoute } from '@react-navigation/native';
@@ -40,6 +41,8 @@ const Game: FunctionComponent = () => {
   const [currentPlayer, setCurrentPlayer] = useState<'X' | 'O'>('X');
   const [winner, setWinner] = useState<string | null>(null);
 
+  type Player = { name: string; gameWins: number };
+
   // Check for winner
   useEffect(() => {
     const checkWinner = () => {
@@ -70,6 +73,29 @@ const Game: FunctionComponent = () => {
       setWinner(winner);
     }
   }, [gameGrid]);
+
+  useEffect(() => {
+    if (!winner) return;
+    const updateWinner = async () => {
+      const winnerName = (winner === 'X' ? playerX : playerO).trim();
+      if (!winnerName) return;
+
+      const existing = (await storage.get<Player[]>('players')) || [];
+      const index = existing.findIndex(player => player.name === winnerName);
+      const updated =
+        index >= 0
+          ? existing.map((player, i) =>
+              i === index
+                ? { ...player, gameWins: player.gameWins + 1 }
+                : player,
+            )
+          : [...existing, { name: winnerName, gameWins: 1 }];
+
+      await storage.set('players', updated);
+    };
+
+    updateWinner();
+  }, [winner, playerX, playerO]);
 
   // Handle cell press
   const onCellPress = useCallback(

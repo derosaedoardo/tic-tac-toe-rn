@@ -9,5 +9,8 @@ export const en = {
     gameScreen: 'Game Screen',
     resetGame: 'Reset Game',
     winner: 'Winner',
+    playersList: 'Players',
+    wins: 'Wins',
+    noPlayers: 'No players yet',
   },
 };

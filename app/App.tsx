@@ -9,8 +9,13 @@ const App = () => {
 
   // App Initialization
   useEffect(() => {
-    // i18n Initialization
-    initI18n().then(() => setReady(true));
+    // resetStorage(); // Uncomment to reset storage during development
+    const initApp = async () => {
+      // i18n Initialization
+      await initI18n();
+      setReady(true);
+    };
+    initApp();
   }, []);
 
   // Render nothing until the app is ready

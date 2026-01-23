@@ -9,5 +9,8 @@ export const it = {
     gameScreen: 'Schermata Gioco',
     resetGame: 'Resetta Partita',
     winner: 'Vincitore',
+    playersList: 'Giocatori',
+    wins: 'Vittorie',
+    noPlayers: 'Nessun giocatore',
   },
 };
