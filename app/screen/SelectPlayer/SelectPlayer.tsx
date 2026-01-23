@@ -1,5 +1,5 @@
-import { SelectPlayerForm } from '@/components/organisms/SelectPlayerForm';
 import { PlayerList } from '@/components/organisms/PlayerList';
+import { SelectPlayerForm } from '@/components/organisms/SelectPlayerForm';
 import { storage } from '@/store';
 import { Container } from '@components/molecules/Container';
 import { PAGES } from '@navigation/types';
@@ -8,7 +8,6 @@ import { useFocusEffect } from '@react-navigation/native';
 import { FunctionComponent, memo, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Player } from './definitions';
-import useStyles from './styles';
 
 const SelectPlayer: FunctionComponent = () => {
   // i18n
@@ -17,18 +16,17 @@ const SelectPlayer: FunctionComponent = () => {
   // Navigation
   const { goTo } = useAppNavigation();
 
-  // Styles
-  const { card, title, label, input } = useStyles();
-
   // State
   const [playerX, setPlayerX] = useState('');
   const [playerO, setPlayerO] = useState('');
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const [isLoadingPlayers, setIsLoadingPlayers] = useState(true);
 
+  // Normalized Player Names
   const normalizedPlayerX = useMemo(() => playerX.trim(), [playerX]);
   const normalizedPlayerO = useMemo(() => playerO.trim(), [playerO]);
 
+  // Handler button press
   const onButtonPress = useCallback(() => {
     goTo(PAGES.Game, {
       playerX: normalizedPlayerX,
@@ -36,6 +34,7 @@ const SelectPlayer: FunctionComponent = () => {
     });
   }, [normalizedPlayerX, normalizedPlayerO, goTo]);
 
+  // Disable Button Logic
   const isButtonDisabled = useMemo(() => {
     if (normalizedPlayerX === '' || normalizedPlayerO === '') {
       return true;
@@ -45,6 +44,7 @@ const SelectPlayer: FunctionComponent = () => {
 
   useFocusEffect(
     useCallback(() => {
+      // Load players from storage
       const load = async () => {
         setIsLoadingPlayers(true);
         setPlayerList([]);
@@ -53,6 +53,8 @@ const SelectPlayer: FunctionComponent = () => {
         setIsLoadingPlayers(false);
       };
       load();
+
+      // Reset selected players when screen is focused
       setPlayerX('');
       setPlayerO('');
     }, []),

@@ -23,7 +23,10 @@ const PlayerList: FunctionComponent<PlayerListProps> = ({
     if (playerList.length === 0) {
       return <Text style={listEmpty}>{t('noPlayers')}</Text>;
     }
-    return playerList.map((player, index) => (
+    const topPlayers = [...playerList]
+      .sort((a, b) => b.gameWins - a.gameWins)
+      .slice(0, 3);
+    return topPlayers.map((player, index) => (
       <View key={index} style={listRow}>
         <Text style={listName}>{player.name}</Text>
         <Text style={listWins}>

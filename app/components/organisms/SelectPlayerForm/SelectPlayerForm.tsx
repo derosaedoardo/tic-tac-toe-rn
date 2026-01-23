@@ -1,7 +1,8 @@
+import { Button } from '@/components/atoms/Button';
 import { SelectPlayerInput } from '@/components/molecules/SelectPlayerInput';
 import { FunctionComponent, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { SelectPlayerFormProps } from './definitions';
 import useStyles from './styles';
 
