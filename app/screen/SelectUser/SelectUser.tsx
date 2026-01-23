@@ -1,11 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { memo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import { RootStackParamList } from '../../navigation/types';
 import useStyles from './styles';
 
 const SelectUser = () => {
+  const { t } = useTranslation();
   const navigation =
     useNavigation<
       NativeStackNavigationProp<RootStackParamList, 'SelectUser'>
@@ -13,32 +15,32 @@ const SelectUser = () => {
 
   const { container, title, input } = useStyles();
 
-  const [player1, setPlayer1] = useState('');
-  const [player2, setPlayer2] = useState('');
+  const [playerX, setPlayerX] = useState('');
+  const [playerO, setPlayerO] = useState('');
 
   return (
     <View style={container}>
-      <Text style={title}>Select User</Text>
+      <Text style={title}>{t('selectUserTitle')}</Text>
       <View>
-        <Text>Player 1:</Text>
+        <Text>{t('playerX')}:</Text>
         <TextInput
           style={input}
-          placeholder="Player 1"
-          value={player1}
-          onChangeText={setPlayer1}
+          placeholder={t('playerX')}
+          value={playerX}
+          onChangeText={setPlayerX}
         />
-        <Text>Player 2:</Text>
+        <Text>{t('playerO')}:</Text>
         <TextInput
           style={input}
-          placeholder="Player 2"
-          value={player2}
-          onChangeText={setPlayer2}
+          placeholder={t('playerO')}
+          value={playerO}
+          onChangeText={setPlayerO}
         />
       </View>
       <Pressable
-        onPress={() => navigation.navigate('Game', { player1, player2 })}
+        onPress={() => navigation.navigate('Game', { playerX, playerO })}
       >
-        <Text>Start Game</Text>
+        <Text>{t('startGame')}</Text>
       </Pressable>
     </View>
   );

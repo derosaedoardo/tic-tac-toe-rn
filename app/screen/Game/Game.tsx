@@ -1,17 +1,19 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { memo, useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 import { RootStackParamList } from '../../navigation/types';
 import { GameRoute } from './definitions';
 import useStyles from './styles';
 
 const Game = () => {
+  const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList, 'Game'>>();
   const { board, row: rowStyle, cell } = useStyles();
   const {
-    params: { player1, player2 },
+    params: { playerX, playerO },
   } = useRoute<GameRoute>();
   const [gameGrid, setGameGrid] = useState<string[][]>(
     Array(3)
@@ -73,9 +75,13 @@ const Game = () => {
   return (
     <View>
       <View>
-        <Text>Game Screen</Text>
-        <Text>Player 1: {player1}</Text>
-        <Text>Player 2: {player2}</Text>
+        <Text>{t('gameScreen')}</Text>
+        <Text>
+          {t('playerX')}: {playerX}
+        </Text>
+        <Text>
+          {t('playerO')}: {playerO}
+        </Text>
       </View>
 
       <View style={board}>
@@ -107,8 +113,8 @@ const Game = () => {
       >
         <Text>
           {winner
-            ? `Winner: ${winner === 'X' ? player1 : player2}`
-            : 'Reset Game'}
+            ? `${t('winner')}: ${winner === 'X' ? playerX : playerO}`
+            : t('resetGame')}
         </Text>
       </Pressable>
     </View>
