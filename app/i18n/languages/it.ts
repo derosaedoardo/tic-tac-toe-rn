@@ -12,5 +12,6 @@ export const it = {
     playersList: 'Giocatori',
     wins: 'Vittorie',
     noPlayers: 'Nessun giocatore',
+    loadingPlayers: 'Aggiornamento giocatori...',
   },
 };

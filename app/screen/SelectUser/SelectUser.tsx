@@ -34,36 +34,49 @@ const SelectUser: FunctionComponent = () => {
   const [playerX, setPlayerX] = useState('');
   const [playerO, setPlayerO] = useState('');
   const [playerList, setPlayerList] = useState<Player[]>([]);
+  const [isLoadingPlayers, setIsLoadingPlayers] = useState(true);
+
+  const normalizedPlayerX = useMemo(() => playerX.trim(), [playerX]);
+  const normalizedPlayerO = useMemo(() => playerO.trim(), [playerO]);
 
   const onButtonPress = useCallback(() => {
-    goTo(PAGES.Game, { playerX, playerO });
-  }, [playerX, playerO, goTo]);
+    goTo(PAGES.Game, {
+      playerX: normalizedPlayerX,
+      playerO: normalizedPlayerO,
+    });
+  }, [normalizedPlayerX, normalizedPlayerO, goTo]);
 
   const isButtonDisabled = useMemo(() => {
-    return playerX.trim() === '' || playerO.trim() === '';
-  }, [playerX, playerO]);
+    if (normalizedPlayerX === '' || normalizedPlayerO === '') {
+      return true;
+    }
+    return (
+      normalizedPlayerX.toLowerCase() === normalizedPlayerO.toLowerCase()
+    );
+  }, [normalizedPlayerX, normalizedPlayerO]);
 
-  const loadPlayers = useCallback(() => {
-    const load = async () => {
-      const stored = await storage.get<Player[]>('players');
-      if (stored && stored.length > 0) {
-        setPlayerList(stored);
-        return;
-      }
-      const initialPlayers: Player[] = [];
-      await storage.set('players', initialPlayers);
-      setPlayerList(initialPlayers);
-    };
-    load();
-  }, []);
-
-  useFocusEffect(loadPlayers);
+  useFocusEffect(
+    useCallback(() => {
+      const load = async () => {
+        setIsLoadingPlayers(true);
+        setPlayerList([]);
+        const stored = await storage.get<Player[]>('players');
+        setPlayerList(stored && stored.length > 0 ? stored : []);
+        setIsLoadingPlayers(false);
+      };
+      load();
+      setPlayerX('');
+      setPlayerO('');
+    }, []),
+  );
 
   return (
     <Container>
       <View style={listCard}>
         <Text style={listTitle}>{t('playersList')}</Text>
-        {playerList.length === 0 ? (
+        {isLoadingPlayers ? (
+          <Text style={listEmpty}>{t('loadingPlayers')}</Text>
+        ) : playerList.length === 0 ? (
           <Text style={listEmpty}>{t('noPlayers')}</Text>
         ) : (
           playerList.map((player, index) => (

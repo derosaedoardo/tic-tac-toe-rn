@@ -81,7 +81,10 @@ const Game: FunctionComponent = () => {
       if (!winnerName) return;
 
       const existing = (await storage.get<Player[]>('players')) || [];
-      const index = existing.findIndex(player => player.name === winnerName);
+      const winnerKey = winnerName.toLowerCase();
+      const index = existing.findIndex(
+        player => player.name.trim().toLowerCase() === winnerKey,
+      );
       const updated =
         index >= 0
           ? existing.map((player, i) =>
