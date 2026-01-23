@@ -1,10 +1,9 @@
-import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import { Button } from '../../components/atoms/Button';
-import { PAGES, RootStackParamList } from '../../navigation/types';
+import { PAGES } from '../../navigation/types';
+import useAppNavigation from '../../navigation/useAppNavigation';
 import useStyles from './styles';
 
 const Homepage = () => {
@@ -12,8 +11,7 @@ const Homepage = () => {
   const { t } = useTranslation();
 
   // Navigation
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList, PAGES.Home>>();
+  const { goTo } = useAppNavigation();
 
   // Styles
   const {
@@ -23,8 +21,6 @@ const Homepage = () => {
     orbTwo,
     content,
     title,
-    startButton,
-    startButtonText,
   } = useStyles();
 
   return (
@@ -40,7 +36,7 @@ const Homepage = () => {
         <Text style={title}>{t('title')}</Text>
         <Button
           title={t('start')}
-          onPress={() => navigation.navigate(PAGES.SelectUser)}
+          onPress={() => goTo(PAGES.SelectUser)}
         />
       </View>
     </View>

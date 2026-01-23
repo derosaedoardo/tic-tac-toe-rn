@@ -1,16 +1,15 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useRoute } from '@react-navigation/native';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
-import { RootStackParamList } from '../../navigation/types';
+import { PAGES } from '../../navigation/types';
+import useAppNavigation from '../../navigation/useAppNavigation';
 import { GameRoute } from './definitions';
 import useStyles from './styles';
 
 const Game = () => {
   const { t } = useTranslation();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList, 'Game'>>();
+  const { goTo } = useAppNavigation();
   const {
     container,
     background,
@@ -120,7 +119,7 @@ const Game = () => {
           <Pressable
             onPress={() => {
               if (winner) {
-                navigation.navigate('SelectUser');
+                goTo(PAGES.SelectUser);
               }
               setGameGrid(
                 Array(3)

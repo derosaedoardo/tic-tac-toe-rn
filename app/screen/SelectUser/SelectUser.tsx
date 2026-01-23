@@ -1,17 +1,13 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Text, TextInput, View } from 'react-native';
-import { RootStackParamList } from '../../navigation/types';
+import { PAGES } from '../../navigation/types';
+import useAppNavigation from '../../navigation/useAppNavigation';
 import useStyles from './styles';
 
 const SelectUser = () => {
   const { t } = useTranslation();
-  const navigation =
-    useNavigation<
-      NativeStackNavigationProp<RootStackParamList, 'SelectUser'>
-    >();
+  const { goTo } = useAppNavigation();
 
   const {
     container,
@@ -54,7 +50,7 @@ const SelectUser = () => {
             onChangeText={setPlayerO}
           />
           <Pressable
-            onPress={() => navigation.navigate('Game', { playerX, playerO })}
+            onPress={() => goTo(PAGES.Game, { playerX, playerO })}
             style={({ pressed }) => [startButton, pressed && { opacity: 0.8 }]}
           >
             <Text style={startButtonText}>{t('startGame')}</Text>
