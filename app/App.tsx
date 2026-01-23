@@ -12,8 +12,11 @@ const App = () => {
     // resetStorage(); // Uncomment to reset storage during development
     const initApp = async () => {
       // i18n Initialization
-      await initI18n();
-      setReady(true);
+      try {
+        await initI18n();
+      } finally {
+        setReady(true);
+      }
     };
     initApp();
   }, []);

@@ -23,8 +23,8 @@ const PlayerList: FunctionComponent<PlayerListProps> = ({
     const topPlayers = [...playerList]
       .sort((a, b) => b.gameWins - a.gameWins)
       .slice(0, 3);
-    return topPlayers.map((player, index) => (
-      <View key={index} style={listRow}>
+    return topPlayers.map(player => (
+      <View key={player.name} style={listRow}>
         <Text style={listName}>{player.name}</Text>
         <Text style={listWins}>
           {t('wins')}: {player.gameWins}

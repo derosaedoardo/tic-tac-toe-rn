@@ -11,10 +11,10 @@ export const en = {
     winner: 'Winner',
     tie: 'Tie!',
     turn: "{{player}}'s turn",
+    goBack: 'Go Back',
     playersList: 'Players',
     wins: 'Wins',
     noPlayers: 'No players yet',
     loadingPlayers: 'Updating players...',
-    goBack: 'Go Back',
   },
 };

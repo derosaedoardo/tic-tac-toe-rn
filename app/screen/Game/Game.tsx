@@ -67,9 +67,9 @@ const Game: FunctionComponent = () => {
       return null;
     };
 
-    const winner = checkWinner();
-    if (winner) {
-      setWinner(winner);
+    const gameWinner = checkWinner();
+    if (gameWinner) {
+      setWinner(gameWinner);
     }
   }, [gameGrid]);
 

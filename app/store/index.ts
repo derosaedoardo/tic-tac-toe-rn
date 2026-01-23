@@ -6,7 +6,12 @@ export const storage = {
 
   get: async <T>(key: string): Promise<T | null> => {
     const v = await AsyncStorage.getItem(key);
-    return v ? (JSON.parse(v) as T) : null;
+    if (!v) return null;
+    try {
+      return JSON.parse(v) as T;
+    } catch {
+      return null;
+    }
   },
 
   remove: (key: string) => AsyncStorage.removeItem(key),

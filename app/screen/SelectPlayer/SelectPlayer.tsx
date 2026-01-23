@@ -40,19 +40,25 @@ const SelectPlayer: FunctionComponent = () => {
 
   useFocusEffect(
     useCallback(() => {
+      let isActive = true;
       // Load players from storage
       const load = async () => {
         setIsLoadingPlayers(true);
         setPlayerList([]);
         const stored = await storage.get<Player[]>('players');
-        setPlayerList(stored && stored.length > 0 ? stored : []);
-        setIsLoadingPlayers(false);
+        if (isActive) {
+          setPlayerList(stored && stored.length > 0 ? stored : []);
+          setIsLoadingPlayers(false);
+        }
       };
       load();
 
       // Reset selected players when screen is focused
       setPlayerX('');
       setPlayerO('');
+      return () => {
+        isActive = false;
+      };
     }, []),
   );
 
