@@ -1,6 +1,7 @@
 import { Button } from '@/components/atoms/Button';
 import { Container } from '@/components/molecules/Container';
 import { GameGrid } from '@/components/organisms/GameGrid';
+import useAppNavigation from '@/navigation/useAppNavigation';
 import { storage } from '@/store';
 import { useRoute } from '@react-navigation/native';
 import {
@@ -19,6 +20,8 @@ import useStyles from './styles';
 const Game: FunctionComponent = () => {
   // i18n
   const { t } = useTranslation();
+
+  const { goBack } = useAppNavigation();
 
   // Styles
   const { title, subtitle, card } = useStyles();
@@ -150,6 +153,7 @@ const Game: FunctionComponent = () => {
         {winner || isTie ? (
           <Button title={t('resetGame')} onPress={onResetPress} />
         ) : null}
+        <Button title={t('goBack')} onPress={goBack} />
       </View>
     </Container>
   );

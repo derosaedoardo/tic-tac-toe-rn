@@ -15,5 +15,6 @@ export const en = {
     wins: 'Wins',
     noPlayers: 'No players yet',
     loadingPlayers: 'Updating players...',
+    goBack: 'Go Back',
   },
 };

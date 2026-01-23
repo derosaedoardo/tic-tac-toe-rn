@@ -3,8 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Game } from '@screens/Game';
 import { Homepage } from '@screens/Homepage';
-import { PAGES, RootStackParamList } from './types';
 import { useTranslation } from 'react-i18next';
+import { PAGES, RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -17,17 +17,17 @@ const AppNavigator = () => {
         <Stack.Screen
           name={PAGES.Home}
           component={Homepage}
-          options={{ title: t('title'), headerShown: true }}
+          options={{ title: t('title'), headerShown: false }}
         />
         <Stack.Screen
           name={PAGES.SelectPlayer}
           component={SelectPlayer}
-          options={{ title: t('selectPlayerTitle'), headerShown: true }}
+          options={{ title: t('selectPlayerTitle'), headerShown: false }}
         />
         <Stack.Screen
           name={PAGES.Game}
           component={Game}
-          options={{ title: t('gameScreen'), headerShown: true }}
+          options={{ title: t('gameScreen'), headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
