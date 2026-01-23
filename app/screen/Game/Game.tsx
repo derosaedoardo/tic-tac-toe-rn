@@ -136,8 +136,8 @@ const Game: FunctionComponent = () => {
         {winner
           ? `${t('winner')}: ${winner === 'X' ? playerX : playerO}`
           : isTie
-          ? 'Pareggio!'
-          : `${currentPlayer === 'X' ? playerX : playerO}'s turn`}
+          ? t('tie')
+          : t('turn', { player: currentPlayer === 'X' ? playerX : playerO })}
       </Text>
       <Text style={subtitle}>
         {t('playerX')}: {playerX}

@@ -9,6 +9,8 @@ export const en = {
     gameScreen: 'Game Screen',
     resetGame: 'Reset Game',
     winner: 'Winner',
+    tie: 'Tie!',
+    turn: "{{player}}'s turn",
     playersList: 'Players',
     wins: 'Wins',
     noPlayers: 'No players yet',
