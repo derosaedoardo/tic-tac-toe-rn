@@ -1,5 +1,11 @@
 import { useRoute } from '@react-navigation/native';
-import { memo, useCallback, useEffect, useState } from 'react';
+import {
+  FunctionComponent,
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 import { Container } from '../../components/molecules/Container';
@@ -8,7 +14,7 @@ import useAppNavigation from '../../navigation/useAppNavigation';
 import { GameRoute } from './definitions';
 import useStyles from './styles';
 
-const Game = () => {
+const Game: FunctionComponent = () => {
   // i18n
   const { t } = useTranslation();
 

@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { FunctionComponent, memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, TextInput, View } from 'react-native';
 import { Button } from '../../components/atoms/Button';
@@ -7,7 +7,7 @@ import { PAGES } from '../../navigation/types';
 import useAppNavigation from '../../navigation/useAppNavigation';
 import useStyles from './styles';
 
-const SelectUser = () => {
+const SelectUser: FunctionComponent = () => {
   // i18n
   const { t } = useTranslation();
 
