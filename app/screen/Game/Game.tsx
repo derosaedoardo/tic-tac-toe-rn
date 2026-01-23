@@ -1,7 +1,7 @@
 import { Button } from '@/components/atoms/Button';
-import GameGrid from '@/components/organisms/GameGrid';
+import { Container } from '@/components/molecules/Container';
+import { GameGrid } from '@/components/organisms/GameGrid';
 import { storage } from '@/store';
-import { Container } from '@components/molecules/Container';
 import useAppNavigation from '@navigation/useAppNavigation';
 import { useRoute } from '@react-navigation/native';
 import {

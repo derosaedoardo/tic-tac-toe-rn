@@ -1,15 +1,16 @@
+import { SelectPlayerForm } from '@/components/organisms/SelectPlayerForm';
+import { PlayerList } from '@/components/organisms/PlayerList';
 import { storage } from '@/store';
-import { Button } from '@components/atoms/Button';
 import { Container } from '@components/molecules/Container';
 import { PAGES } from '@navigation/types';
 import useAppNavigation from '@navigation/useAppNavigation';
 import { useFocusEffect } from '@react-navigation/native';
 import { FunctionComponent, memo, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, TextInput, View } from 'react-native';
 import { Player } from './definitions';
 import useStyles from './styles';
-const SelectUser: FunctionComponent = () => {
+
+const SelectPlayer: FunctionComponent = () => {
   // i18n
   const { t } = useTranslation();
 
@@ -17,18 +18,7 @@ const SelectUser: FunctionComponent = () => {
   const { goTo } = useAppNavigation();
 
   // Styles
-  const {
-    card,
-    title,
-    label,
-    input,
-    listCard,
-    listTitle,
-    listRow,
-    listName,
-    listWins,
-    listEmpty,
-  } = useStyles();
+  const { card, title, label, input } = useStyles();
 
   // State
   const [playerX, setPlayerX] = useState('');
@@ -50,9 +40,7 @@ const SelectUser: FunctionComponent = () => {
     if (normalizedPlayerX === '' || normalizedPlayerO === '') {
       return true;
     }
-    return (
-      normalizedPlayerX.toLowerCase() === normalizedPlayerO.toLowerCase()
-    );
+    return normalizedPlayerX.toLowerCase() === normalizedPlayerO.toLowerCase();
   }, [normalizedPlayerX, normalizedPlayerO]);
 
   useFocusEffect(
@@ -72,49 +60,17 @@ const SelectUser: FunctionComponent = () => {
 
   return (
     <Container>
-      <View style={listCard}>
-        <Text style={listTitle}>{t('playersList')}</Text>
-        {isLoadingPlayers ? (
-          <Text style={listEmpty}>{t('loadingPlayers')}</Text>
-        ) : playerList.length === 0 ? (
-          <Text style={listEmpty}>{t('noPlayers')}</Text>
-        ) : (
-          playerList.map((player, index) => (
-            <View key={index} style={listRow}>
-              <Text style={listName}>{player.name}</Text>
-              <Text style={listWins}>
-                {t('wins')}: {player.gameWins}
-              </Text>
-            </View>
-          ))
-        )}
-      </View>
-
-      <Text style={title}>{t('selectUserTitle')}</Text>
-
-      <View style={card}>
-        <Text style={label}>{t('playerX')}:</Text>
-        <TextInput
-          style={input}
-          placeholder={t('playerX')}
-          value={playerX}
-          onChangeText={setPlayerX}
-        />
-        <Text style={label}>{t('playerO')}:</Text>
-        <TextInput
-          style={input}
-          placeholder={t('playerO')}
-          value={playerO}
-          onChangeText={setPlayerO}
-        />
-        <Button
-          title={t('startGame')}
-          onPress={onButtonPress}
-          disabled={isButtonDisabled}
-        />
-      </View>
+      <PlayerList playerList={playerList} isLoadingPlayers={isLoadingPlayers} />
+      <SelectPlayerForm
+        playerX={playerX}
+        playerO={playerO}
+        onChangePlayerX={setPlayerX}
+        onChangePlayerO={setPlayerO}
+        onSubmit={onButtonPress}
+        isButtonDisabled={isButtonDisabled}
+      />
     </Container>
   );
 };
 
-export default memo(SelectUser);
+export default memo(SelectPlayer);

@@ -2,13 +2,13 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
   Home: undefined;
-  SelectUser: undefined;
+  SelectPlayer: undefined;
   Game: { playerX: string; playerO: string };
 };
 
 export enum PAGES {
   Home = 'Home',
-  SelectUser = 'SelectUser',
+  SelectPlayer = 'SelectPlayer',
   Game = 'Game',
 }
 

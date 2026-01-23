@@ -1,8 +1,8 @@
+import { SelectPlayer } from '@/screen/SelectPlayer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Game } from '@screens/Game';
 import { Homepage } from '@screens/Homepage';
-import { SelectUser } from '@screens/SelectUser';
 import { PAGES, RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -17,9 +17,9 @@ const AppNavigator = () => {
           options={{ title: 'Tic Tac Toe', headerShown: true }}
         />
         <Stack.Screen
-          name={PAGES.SelectUser}
-          component={SelectUser}
-          options={{ title: 'Select User', headerShown: true }}
+          name={PAGES.SelectPlayer}
+          component={SelectPlayer}
+          options={{ title: 'Select Player', headerShown: true }}
         />
         <Stack.Screen
           name={PAGES.Game}

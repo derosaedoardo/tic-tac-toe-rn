@@ -2,7 +2,7 @@ export const en = {
   translation: {
     title: 'Tic Tac Toe',
     start: 'Play!',
-    selectUserTitle: 'Select User',
+    selectPlayerTitle: 'Select Player',
     playerX: 'Player X',
     playerO: 'Player O',
     startGame: 'Start Game',

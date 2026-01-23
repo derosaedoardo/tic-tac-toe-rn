@@ -20,7 +20,7 @@ const Homepage: FunctionComponent = () => {
   return (
     <Container>
       <Text style={title}>{t('title')}</Text>
-      <Button title={t('start')} onPress={() => goTo(PAGES.SelectUser)} />
+      <Button title={t('start')} onPress={() => goTo(PAGES.SelectPlayer)} />
     </Container>
   );
 };

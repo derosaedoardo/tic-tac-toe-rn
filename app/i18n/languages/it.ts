@@ -2,7 +2,7 @@ export const it = {
   translation: {
     title: 'Tris',
     start: 'Gioca!',
-    selectUserTitle: 'Seleziona Utente',
+    selectPlayerTitle: 'Seleziona Giocatore',
     playerX: 'Giocatore X',
     playerO: 'Giocatore O',
     startGame: 'Avvia Partita',
