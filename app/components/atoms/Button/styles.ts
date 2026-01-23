@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { Platform, StyleSheet } from 'react-native';
+import { ButtonStylesProps } from './definitions';
 
-const useStyles = () =>
+const useStyles = ({ disabled }: ButtonStylesProps) =>
   useMemo(
     () =>
       StyleSheet.create({
@@ -10,7 +11,7 @@ const useStyles = () =>
           alignSelf: 'center',
           paddingVertical: 12,
           paddingHorizontal: 28,
-          backgroundColor: '#1F6F8B',
+          backgroundColor: disabled ? '#CCCCCC' : '#1F6F8B',
           borderRadius: 999,
           shadowColor: '#1F6F8B',
           shadowOpacity: 0.25,
@@ -19,7 +20,7 @@ const useStyles = () =>
           elevation: 6,
         },
         buttonText: {
-          color: '#FFFFFF',
+          color: disabled ? '#999999' : '#FFFFFF',
           fontSize: 14,
           fontWeight: '600',
           letterSpacing: 0.6,
@@ -31,7 +32,7 @@ const useStyles = () =>
           }),
         },
       }),
-    [],
+    [disabled],
   );
 
 export default useStyles;

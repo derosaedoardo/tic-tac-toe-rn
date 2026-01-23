@@ -2,7 +2,7 @@ import { Button } from '@components/atoms/Button';
 import { Container } from '@components/molecules/Container';
 import { PAGES } from '@navigation/types';
 import useAppNavigation from '@navigation/useAppNavigation';
-import { FunctionComponent, memo, useState } from 'react';
+import { FunctionComponent, memo, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, TextInput, View } from 'react-native';
 import useStyles from './styles';
@@ -19,6 +19,14 @@ const SelectUser: FunctionComponent = () => {
   // State
   const [playerX, setPlayerX] = useState('');
   const [playerO, setPlayerO] = useState('');
+
+  const onButtonPress = useCallback(() => {
+    goTo(PAGES.Game, { playerX, playerO });
+  }, [playerX, playerO, goTo]);
+
+  const isButtonDisabled = useMemo(() => {
+    return playerX.trim() === '' || playerO.trim() === '';
+  }, [playerX, playerO]);
 
   return (
     <Container>
@@ -40,7 +48,8 @@ const SelectUser: FunctionComponent = () => {
         />
         <Button
           title={t('startGame')}
-          onPress={() => goTo(PAGES.Game, { playerX, playerO })}
+          onPress={onButtonPress}
+          disabled={isButtonDisabled}
         />
       </View>
     </Container>
