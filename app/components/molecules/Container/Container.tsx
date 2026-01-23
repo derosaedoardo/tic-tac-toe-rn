@@ -1,9 +1,8 @@
+import { BackgroundOrbs } from '@components/atoms/BackgroundOrbs';
 import { FunctionComponent, memo } from 'react';
 import { View } from 'react-native';
-import { BackgroundOrbs } from '../../atoms/BackgroundOrbs';
 import { ContainerProps } from './definitions';
 import useStyles from './styles';
-
 const Container: FunctionComponent<ContainerProps> = ({ children }) => {
   // Styles
   const { container, content } = useStyles();

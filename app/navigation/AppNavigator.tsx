@@ -1,8 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Game } from '../screen/Game';
-import { Homepage } from '../screen/Homepage';
-import { SelectUser } from '../screen/SelectUser';
+import { Game } from '@screens/Game';
+import { Homepage } from '@screens/Homepage';
+import { SelectUser } from '@screens/SelectUser';
 import { PAGES, RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

@@ -1,11 +1,11 @@
 import { FunctionComponent, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text } from 'react-native';
-import { Button } from '../../components/atoms/Button';
-import { Container } from '../../components/molecules/Container';
-import { PAGES } from '../../navigation/types';
-import useAppNavigation from '../../navigation/useAppNavigation';
-import useStyles from './styles';
+import { Button } from '@components/atoms/Button';
+import { Container } from '@components/molecules/Container';
+import { PAGES } from '@navigation/types';
+import useAppNavigation from '@navigation/useAppNavigation';
+import useStyles from '@screens/Homepage/styles';
 
 const Homepage: FunctionComponent = () => {
   // i18n

@@ -1,7 +1,7 @@
 import { FunctionComponent, memo } from 'react';
 import { Pressable, Text } from 'react-native';
-import { ButtonProps } from './definitions';
-import useStyles from './styles';
+import { ButtonProps } from '@components/atoms/Button/definitions';
+import useStyles from '@components/atoms/Button/styles';
 
 const Button: FunctionComponent<ButtonProps> = ({ onPress, title }) => {
   const { button, buttonText } = useStyles();

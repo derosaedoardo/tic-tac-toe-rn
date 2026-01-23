@@ -1,3 +1,6 @@
+import { Container } from '@components/molecules/Container';
+import { PAGES } from '@navigation/types';
+import useAppNavigation from '@navigation/useAppNavigation';
 import { useRoute } from '@react-navigation/native';
 import {
   FunctionComponent,
@@ -8,9 +11,6 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
-import { Container } from '../../components/molecules/Container';
-import { PAGES } from '../../navigation/types';
-import useAppNavigation from '../../navigation/useAppNavigation';
 import { GameRoute } from './definitions';
 import useStyles from './styles';
 

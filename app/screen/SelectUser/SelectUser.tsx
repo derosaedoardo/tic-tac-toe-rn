@@ -1,12 +1,11 @@
+import { Button } from '@components/atoms/Button';
+import { Container } from '@components/molecules/Container';
+import { PAGES } from '@navigation/types';
+import useAppNavigation from '@navigation/useAppNavigation';
 import { FunctionComponent, memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, TextInput, View } from 'react-native';
-import { Button } from '../../components/atoms/Button';
-import { Container } from '../../components/molecules/Container';
-import { PAGES } from '../../navigation/types';
-import useAppNavigation from '../../navigation/useAppNavigation';
 import useStyles from './styles';
-
 const SelectUser: FunctionComponent = () => {
   // i18n
   const { t } = useTranslation();
