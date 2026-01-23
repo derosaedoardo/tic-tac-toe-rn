@@ -1,5 +1,4 @@
 import { FunctionComponent, memo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Text, TextInput } from 'react-native';
 import { SelectPlayerInputProps } from './definitions';
 import useStyles from './styles';
@@ -9,9 +8,6 @@ const SelectPlayerInput: FunctionComponent<SelectPlayerInputProps> = ({
   value,
   onChangeText,
 }) => {
-  // i18n
-  const { t } = useTranslation();
-
   // Styles
   const { label: labelStyle, input } = useStyles();
 

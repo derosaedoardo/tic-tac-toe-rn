@@ -2,7 +2,6 @@ import { Button } from '@/components/atoms/Button';
 import { Container } from '@/components/molecules/Container';
 import { GameGrid } from '@/components/organisms/GameGrid';
 import { storage } from '@/store';
-import useAppNavigation from '@navigation/useAppNavigation';
 import { useRoute } from '@react-navigation/native';
 import {
   FunctionComponent,
@@ -20,9 +19,6 @@ import useStyles from './styles';
 const Game: FunctionComponent = () => {
   // i18n
   const { t } = useTranslation();
-
-  // Navigation
-  const { goTo } = useAppNavigation();
 
   // Styles
   const { title, subtitle, card } = useStyles();

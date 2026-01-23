@@ -6,13 +6,9 @@ import { PAGES } from '@navigation/types';
 import useAppNavigation from '@navigation/useAppNavigation';
 import { useFocusEffect } from '@react-navigation/native';
 import { FunctionComponent, memo, useCallback, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Player } from './definitions';
 
 const SelectPlayer: FunctionComponent = () => {
-  // i18n
-  const { t } = useTranslation();
-
   // Navigation
   const { goTo } = useAppNavigation();
 
