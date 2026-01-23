@@ -1,7 +1,8 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { Button } from '../../components/atoms/Button';
+import { Container } from '../../components/molecules/Container';
 import { PAGES } from '../../navigation/types';
 import useAppNavigation from '../../navigation/useAppNavigation';
 import useStyles from './styles';
@@ -14,22 +15,13 @@ const Homepage = () => {
   const { goTo } = useAppNavigation();
 
   // Styles
-  const { container, background, orbOne, orbTwo, content, title } = useStyles();
+  const { title } = useStyles();
 
   return (
-    <View style={container}>
-      {/* Background Orbs Design */}
-      <View style={background} pointerEvents="none">
-        <View style={orbOne} />
-        <View style={orbTwo} />
-      </View>
-
-      {/* Content */}
-      <View style={content}>
-        <Text style={title}>{t('title')}</Text>
-        <Button title={t('start')} onPress={() => goTo(PAGES.SelectUser)} />
-      </View>
-    </View>
+    <Container>
+      <Text style={title}>{t('title')}</Text>
+      <Button title={t('start')} onPress={() => goTo(PAGES.SelectUser)} />
+    </Container>
   );
 };
 

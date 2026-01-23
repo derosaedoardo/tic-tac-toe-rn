@@ -6,7 +6,8 @@ const useStyles = () =>
     () =>
       StyleSheet.create({
         button: {
-          marginTop: 24,
+          marginTop: 12,
+          alignSelf: 'center',
           paddingVertical: 12,
           paddingHorizontal: 28,
           backgroundColor: '#1F6F8B',
@@ -19,9 +20,9 @@ const useStyles = () =>
         },
         buttonText: {
           color: '#FFFFFF',
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: '600',
-          letterSpacing: 0.5,
+          letterSpacing: 0.6,
           textTransform: 'uppercase',
           fontFamily: Platform.select({
             ios: 'Avenir Next',

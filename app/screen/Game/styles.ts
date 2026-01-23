@@ -5,42 +5,6 @@ const useStyles = () =>
   useMemo(
     () =>
       StyleSheet.create({
-        container: {
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#F7F2EA',
-          paddingHorizontal: 24,
-        },
-        background: {
-          ...StyleSheet.absoluteFillObject,
-          overflow: 'hidden',
-        },
-        orbOne: {
-          position: 'absolute',
-          width: 320,
-          height: 320,
-          borderRadius: 160,
-          backgroundColor: '#F9C784',
-          opacity: 0.35,
-          top: -100,
-          left: -80,
-        },
-        orbTwo: {
-          position: 'absolute',
-          width: 260,
-          height: 260,
-          borderRadius: 130,
-          backgroundColor: '#A1D6B2',
-          opacity: 0.35,
-          bottom: -80,
-          right: -40,
-        },
-        content: {
-          width: '100%',
-          maxWidth: 360,
-          alignItems: 'center',
-        },
         title: {
           fontSize: 24,
           fontWeight: '700',
