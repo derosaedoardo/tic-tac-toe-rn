@@ -4,6 +4,7 @@ import { ButtonProps } from '@components/atoms/Button/definitions';
 import useStyles from '@components/atoms/Button/styles';
 
 const Button: FunctionComponent<ButtonProps> = ({ onPress, title }) => {
+  // Styles
   const { button, buttonText } = useStyles();
 
   return (
