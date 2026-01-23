@@ -20,9 +20,6 @@ const PlayerList: FunctionComponent<PlayerListProps> = ({
     if (isLoadingPlayers) {
       return <Text style={listEmpty}>{t('loadingPlayers')}</Text>;
     }
-    if (playerList.length === 0) {
-      return <Text style={listEmpty}>{t('noPlayers')}</Text>;
-    }
     const topPlayers = [...playerList]
       .sort((a, b) => b.gameWins - a.gameWins)
       .slice(0, 3);
@@ -36,6 +33,12 @@ const PlayerList: FunctionComponent<PlayerListProps> = ({
     ));
   }, [isLoadingPlayers, playerList, listRow, listName, listWins, listEmpty, t]);
 
+  // Do not render if no players
+  if (playerList.length === 0) {
+    return null;
+  }
+
+  // Main Render
   return (
     <View style={listCard}>
       <Text style={listTitle}>{t('playersList')}</Text>

@@ -130,16 +130,19 @@ const Game: FunctionComponent = () => {
     setWinner(null);
   }, []);
 
-  // Button Title
-  const buttonTitle = useMemo(() => {
-    return winner
-      ? `${t('winner')}: ${winner === 'X' ? playerX : playerO}`
-      : t('resetGame');
-  }, [winner, t, playerX, playerO]);
+  const isTie = useMemo(() => {
+    return gameGrid.flat().every(cell => cell !== '') && !winner;
+  }, [gameGrid, winner]);
 
   return (
     <Container>
-      <Text style={title}>{t('gameScreen')}</Text>
+      <Text style={title}>
+        {winner
+          ? `${t('winner')}: ${winner === 'X' ? playerX : playerO}`
+          : isTie
+          ? 'Pareggio!'
+          : `${currentPlayer === 'X' ? playerX : playerO}'s turn`}
+      </Text>
       <Text style={subtitle}>
         {t('playerX')}: {playerX}
       </Text>
@@ -148,7 +151,9 @@ const Game: FunctionComponent = () => {
       </Text>
       <View style={card}>
         <GameGrid gameGrid={gameGrid} onCellPress={onCellPress} />
-        <Button title={buttonTitle} onPress={onResetPress} />
+        {winner || isTie ? (
+          <Button title={t('resetGame')} onPress={onResetPress} />
+        ) : null}
       </View>
     </Container>
   );
