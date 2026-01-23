@@ -1,7 +1,7 @@
 export const it = {
   translation: {
-    title: 'Tic Tac Toe',
-    start: 'Inizia',
+    title: 'Tris',
+    start: 'Gioca!',
     selectUserTitle: 'Seleziona Utente',
     playerX: 'Giocatore X',
     playerO: 'Giocatore O',

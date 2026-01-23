@@ -11,7 +11,22 @@ const Game = () => {
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList, 'Game'>>();
-  const { board, row: rowStyle, cell } = useStyles();
+  const {
+    container,
+    background,
+    orbOne,
+    orbTwo,
+    content,
+    title,
+    subtitle,
+    card,
+    board,
+    row: rowStyle,
+    cell,
+    cellText,
+    actionButton,
+    actionButtonText,
+  } = useStyles();
   const {
     params: { playerX, playerO },
   } = useRoute<GameRoute>();
@@ -73,50 +88,59 @@ const Game = () => {
   );
 
   return (
-    <View>
-      <View>
-        <Text>{t('gameScreen')}</Text>
-        <Text>
+    <View style={container}>
+      <View style={background} pointerEvents="none">
+        <View style={orbOne} />
+        <View style={orbTwo} />
+      </View>
+      <View style={content}>
+        <Text style={title}>{t('gameScreen')}</Text>
+        <Text style={subtitle}>
           {t('playerX')}: {playerX}
         </Text>
-        <Text>
+        <Text style={subtitle}>
           {t('playerO')}: {playerO}
         </Text>
-      </View>
-
-      <View style={board}>
-        {[0, 1, 2].map(row => (
-          <View key={row} style={rowStyle}>
-            {[0, 1, 2].map(col => (
-              <Pressable
-                key={`${row}-${col}`}
-                style={cell}
-                onPress={() => onCellPress(row, col)}
-              >
-                <Text>{gameGrid[row][col]}</Text>
-              </Pressable>
+        <View style={card}>
+          <View style={board}>
+            {[0, 1, 2].map(row => (
+              <View key={row} style={rowStyle}>
+                {[0, 1, 2].map(col => (
+                  <Pressable
+                    key={`${row}-${col}`}
+                    style={cell}
+                    onPress={() => onCellPress(row, col)}
+                  >
+                    <Text style={cellText}>{gameGrid[row][col]}</Text>
+                  </Pressable>
+                ))}
+              </View>
             ))}
           </View>
-        ))}
+          <Pressable
+            onPress={() => {
+              if (winner) {
+                navigation.navigate('SelectUser');
+              }
+              setGameGrid(
+                Array(3)
+                  .fill(null)
+                  .map(() => Array(3).fill('')),
+              );
+            }}
+            style={({ pressed }) => [
+              actionButton,
+              pressed && { opacity: 0.8 },
+            ]}
+          >
+            <Text style={actionButtonText}>
+              {winner
+                ? `${t('winner')}: ${winner === 'X' ? playerX : playerO}`
+                : t('resetGame')}
+            </Text>
+          </Pressable>
+        </View>
       </View>
-      <Pressable
-        onPress={() => {
-          if (winner) {
-            navigation.navigate('SelectUser');
-          }
-          setGameGrid(
-            Array(3)
-              .fill(null)
-              .map(() => Array(3).fill('')),
-          );
-        }}
-      >
-        <Text>
-          {winner
-            ? `${t('winner')}: ${winner === 'X' ? playerX : playerO}`
-            : t('resetGame')}
-        </Text>
-      </Pressable>
     </View>
   );
 };

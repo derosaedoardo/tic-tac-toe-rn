@@ -14,12 +14,12 @@ const AppNavigator = () => {
         <Stack.Screen
           name={PAGES.Home}
           component={Homepage}
-          options={{ title: 'Tic Tac Toe', headerShown: false }}
+          options={{ title: 'Tic Tac Toe', headerShown: true }}
         />
         <Stack.Screen
           name={PAGES.SelectUser}
           component={SelectUser}
-          options={{ title: 'Select User', headerShown: false }}
+          options={{ title: 'Select User', headerShown: true }}
         />
         <Stack.Screen
           name={PAGES.Game}
