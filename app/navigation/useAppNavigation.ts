@@ -1,20 +1,31 @@
 import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import type { RootStackParamList } from './types';
-
-type AppNavigation = NativeStackNavigationProp<RootStackParamList>;
+import type {
+  AppNavigation,
+  RootStackParamList,
+  RouteWithoutParams,
+  RouteWithParams,
+} from './types';
 
 const useAppNavigation = () => {
   const navigation = useNavigation<AppNavigation>();
 
-  const goTo = <T extends keyof RootStackParamList>(
+  function goTo<T extends RouteWithoutParams>(screen: T): void;
+
+  function goTo<T extends RouteWithParams>(
     screen: T,
-    ...args: RootStackParamList[T] extends undefined
-      ? []
-      : [RootStackParamList[T]]
-  ) => {
-    navigation.navigate(screen, ...(args as [RootStackParamList[T]]));
-  };
+    params: RootStackParamList[T],
+  ): void;
+
+  function goTo<T extends keyof RootStackParamList>(
+    screen: T,
+    params?: RootStackParamList[T],
+  ) {
+    if (params === undefined) {
+      navigation.navigate(screen as RouteWithoutParams);
+      return;
+    }
+    navigation.navigate(screen as RouteWithParams, params as never);
+  }
 
   return { navigation, goTo, goBack: navigation.goBack };
 };

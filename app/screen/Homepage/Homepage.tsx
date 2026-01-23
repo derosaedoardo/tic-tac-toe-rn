@@ -14,14 +14,7 @@ const Homepage = () => {
   const { goTo } = useAppNavigation();
 
   // Styles
-  const {
-    container,
-    background,
-    orbOne,
-    orbTwo,
-    content,
-    title,
-  } = useStyles();
+  const { container, background, orbOne, orbTwo, content, title } = useStyles();
 
   return (
     <View style={container}>
@@ -34,10 +27,7 @@ const Homepage = () => {
       {/* Content */}
       <View style={content}>
         <Text style={title}>{t('title')}</Text>
-        <Button
-          title={t('start')}
-          onPress={() => goTo(PAGES.SelectUser)}
-        />
+        <Button title={t('start')} onPress={() => goTo(PAGES.SelectUser)} />
       </View>
     </View>
   );
