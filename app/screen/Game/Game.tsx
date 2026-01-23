@@ -1,5 +1,5 @@
+import { Button } from '@/components/atoms/Button';
 import { Container } from '@components/molecules/Container';
-import { PAGES } from '@navigation/types';
 import useAppNavigation from '@navigation/useAppNavigation';
 import { useRoute } from '@react-navigation/native';
 import {
@@ -98,6 +98,16 @@ const Game: FunctionComponent = () => {
     [currentPlayer, winner],
   );
 
+  const onResetPress = useCallback(() => {
+    setGameGrid(
+      Array(3)
+        .fill(null)
+        .map(() => Array(3).fill('')),
+    );
+    setCurrentPlayer('X');
+    setWinner(null);
+  }, []);
+
   return (
     <Container>
       <Text style={title}>{t('gameScreen')}</Text>
@@ -123,25 +133,14 @@ const Game: FunctionComponent = () => {
             </View>
           ))}
         </View>
-        <Pressable
-          onPress={() => {
-            if (winner) {
-              goTo(PAGES.SelectUser);
-            }
-            setGameGrid(
-              Array(3)
-                .fill(null)
-                .map(() => Array(3).fill('')),
-            );
-          }}
-          style={({ pressed }) => [actionButton, pressed && { opacity: 0.8 }]}
-        >
-          <Text style={actionButtonText}>
-            {winner
+        <Button
+          title={
+            winner
               ? `${t('winner')}: ${winner === 'X' ? playerX : playerO}`
-              : t('resetGame')}
-          </Text>
-        </Pressable>
+              : t('resetGame')
+          }
+          onPress={onResetPress}
+        />
       </View>
     </Container>
   );
