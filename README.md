@@ -1,83 +1,63 @@
-# React Native App Template
+# Tic Tac Toe (React Native)
 
-Un template pulito e minimalista per progetti React Native.
+A simple Tic Tac Toe app built with React Native. It includes player selection, a scoreboard saved to AsyncStorage, and a clean UI with custom components.
 
-## Uso
+## Features
 
-Per creare un nuovo progetto usando questo template:
+- Play Tic Tac Toe with two players.
+- Player list with top scores (saved locally).
+- English-only i18n via `react-i18next`.
+- Custom UI components and shared layout container.
+
+## Tech Stack
+
+- React Native
+- React Navigation (native stack)
+- i18next + react-i18next
+- AsyncStorage
+
+## Getting Started
+
+Install dependencies:
 
 ```bash
-npx react-native init MyNewApp --template file:///Users/edoardoderosa/Develop/template/react-native-template
+npm install
 ```
 
-Sostituisci `MyNewApp` con il nome del tuo progetto.
-
-## Struttura
-
-- `app/` - Contiene il componente principale dell'applicazione
-- `index.js` - Entry point dell'app
-- `android/` - Codice nativo Android
-- `ios/` - Codice nativo iOS
-
-## Avvio
+Run the app:
 
 ```bash
-npm start          # Avvia il Metro bundler
-npm run android    # Avvia su Android
-npm run ios        # Avvia su iOS
+npm run start
+npm run android
 ```
 
-## Script disponibili
+For iOS:
 
-- `npm start` - Avvia Metro bundler
-- `npm run android` - Avvia l'app su Android
-- `npm run ios` - Avvia l'app su iOS
-- `npm run lint` - Esegui ESLint
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Project Structure
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```
+app/
+  components/     # UI atoms, molecules, organisms
+  i18n/           # i18n setup and English translations
+  navigation/     # navigation config and typed helpers
+  screen/         # screens (Home, SelectPlayer, Game)
+  store/          # AsyncStorage wrapper
+android/          # Android native project
+ios/              # iOS native project
+```
 
-## Step 3: Modify your app
+## Notes
 
-Now that you have successfully run the app, let's make changes!
+- Player scores are stored under the `players` key in AsyncStorage.
+- The app name is set to "Tic Tac Toe" for both Android and iOS.
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Scripts
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- `npm run start` - Start Metro bundler
+- `npm run android` - Run on Android
+- `npm run ios` - Run on iOS
+- `npm run lint` - Run ESLint
